@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtRouteAnnouncer />
-    <main id="main" class="u-pb-24">
+    <main id="main">
       <NuxtPage />
     </main>
   </div>

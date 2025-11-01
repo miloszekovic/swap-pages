@@ -51,23 +51,6 @@ const token2Price = computed(() => token2Info.value?.token?.price?.price || 0)
 
 const conversionAmounts = [1, 5, 10, 50, 100, 500, 1000, 5000]
 
-const relatedSwaps = computed(() => {
-  const swaps: Array<{ from: string, to: string, url: string }> = []
-  
-  Object.keys(tokensData).forEach(tokenKey => {
-    const tokenData = tokensData[tokenKey]
-    if (tokenKey !== token1 && tokenKey !== token2 && tokenData) {
-      swaps.push({
-        from: token1Data.ticker,
-        to: tokenData.ticker,
-        url: `/swap/${token1}/${tokenKey}`
-      })
-    }
-  })
-  
-  return swaps.slice(0, 6)
-})
-
 // SEO Meta Tags
 const pageTitle = `Swap ${token1Data.name} (${token1Data.ticker}) to ${token2Data.name} (${token2Data.ticker}) | Solflare`
 const pageDescription = `Convert ${token1Data.ticker} to ${token2Data.ticker}. Current rate: 1 ${token1Data.ticker} = ${conversionRate.value.toFixed(6)} ${token2Data.ticker}. Real-time conversion rates and tables.`
@@ -141,18 +124,6 @@ useHead({
       </table>
     </div>
 
-    <div>
-      <h2 style="font-size: 24px; margin-bottom: 15px;">Related Conversions</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-        <NuxtLink 
-          v-for="swap in relatedSwaps" 
-          :key="swap.url"
-          :to="swap.url"
-          style="padding: 10px 20px; background-color: #f0f0f0; border-radius: 5px; text-decoration: none; color: #333;"
-        >
-          {{ swap.from }} to {{ swap.to }}
-        </NuxtLink>
-      </div>
-    </div>
+    <RelatedSwaps :current-token1="token1" :current-token2="token2" :limit="6" />
   </div>
 </template>
