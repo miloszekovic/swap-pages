@@ -1,75 +1,34 @@
-# Nuxt Minimal Starter
+# Swap Pages - Solflare Technical Test
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Nuxt 3 application for displaying Solana token swap information with real-time pricing.
+
+## Features
+- Dynamic routing for token pairs (`/swap/{token1}/{token2}`)
+- Server-side rendering with 1-minute caching
+- Real-time token prices from Solflare Wallet API
+- Conversion tables
+- SEO optimized
+- Responsive design
+
+## Tech Stack
+- Nuxt 3
+- TypeScript
+- Tailwind CSS
+- Solflare Wallet API
 
 ## Setup
-
-Make sure to install dependencies:
-
 ```bash
-# npm
+# Install dependencies
 npm install
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+# Run development server
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Example Routes
+- `/swap/sol/usdc`
+- `/swap/sol/pump`
+- `/swap/usdt/usdc`
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## API
+Token data is fetched from: `https://wallet-api.solflare.com/v2/portfolio/token/{mint}/full-info`
