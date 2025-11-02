@@ -1,31 +1,33 @@
 <script setup lang="ts">
-import { tokensData } from '../../data/tokens'
+const { tokensData } = useTokens()
 
+// Component props definition
 interface Props {
   currentToken1?: string
   currentToken2?: string
   limit?: number
 }
 
+// Set default values for props
 const props = withDefaults(defineProps<Props>(), {
   currentToken1: '',
   currentToken2: '',
   limit: 12
 })
 
-// Generiši sve moguće swap kombinacije dinamički
+// Generate all possible swap combinations dynamically
 const swaps = computed(() => {
   const allSwaps: Array<{ from: string, to: string, url: string, fromName: string, toName: string }> = []
   
   const tokenKeys = Object.keys(tokensData)
   
-  // Generiši sve kombinacije token1 -> token2
+  // Generate all token pair combinations
   tokenKeys.forEach(fromKey => {
     tokenKeys.forEach(toKey => {
-      // Preskoči ako su isti tokeni
+      // Skip if same token
       if (fromKey === toKey) return
       
-      // Preskoči trenutnu kombinaciju
+      // Skip current combination to avoid duplicate
       if (fromKey === props.currentToken1 && toKey === props.currentToken2) return
       
       const fromToken = tokensData[fromKey]
@@ -43,26 +45,27 @@ const swaps = computed(() => {
     })
   })
 
+  // Return limited number of swaps based on prop
   return allSwaps.slice(0, props.limit)
 })
 </script>
 
 <template>
   <div>
-    <h2 style="font-size: 24px; margin-bottom: 20px;">Popular Conversions</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
+    <h2 class="text-xl font-bold mb-5">Popular Conversions</h2>
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
       <NuxtLink
         v-for="swap in swaps"
         :key="swap.url"
         :to="swap.url"
-        style="padding: 20px; background-color: #f5f5f5; border-radius: 8px; text-decoration: none; color: #333; border: 1px solid #ddd; transition: all 0.2s;"
+        class="flex flex-col justify-center p-5 bg-dark rounded-lg no-underline transition-all hover:bg-yellow hover:text-dark"
       >
-        <div style="font-weight: bold; font-size: 16px;">
+        <span class="block font-bold text-base">
           {{ swap.from }} → {{ swap.to }}
-        </div>
-        <div style="font-size: 14px; color: #666; margin-top: 5px;">
+        </span>
+        <span class="block text-sm mt-1">
           {{ swap.fromName }} to {{ swap.toName }}
-        </div>
+        </span>
       </NuxtLink>
     </div>
   </div>

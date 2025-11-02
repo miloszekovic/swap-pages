@@ -1,16 +1,14 @@
 <script setup lang="ts">
-useHead({
+useSeoMeta({
   title: 'Solflare Swap - Convert Solana Tokens',
-  meta: [
-    { name: 'description', content: 'Convert between popular Solana tokens. Real-time exchange rates and conversion tables.' }
-  ]
+  description: 'Convert between popular Solana tokens. Real-time exchange rates and conversion tables.'
 })
 </script>
 
 <template>
-  <div style="padding: 40px; max-width: 1200px; margin: 0 auto;">
-    <h1 style="font-size: 48px; margin-bottom: 20px;">Solana Token Swap</h1>
-    <p style="font-size: 18px; color: #666; margin-bottom: 40px;">
+  <div class="p-10 max-w-7xl mx-auto">
+    <h1 class="text-xxl font-bold mb-5">Solana Token Swap</h1>
+    <p class="text-lg mb-10">
       Convert between popular Solana tokens with real-time exchange rates
     </p>
 

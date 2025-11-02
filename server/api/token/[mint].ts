@@ -26,5 +26,5 @@ export default defineCachedEventHandler(async (event) => {
     })
   }
 }, {
-  maxAge: 60 // 60 sekundi = 1 minut cache
+  maxAge: 60 // 60 sec = 1 minute cache
 })
